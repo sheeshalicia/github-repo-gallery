@@ -4,6 +4,8 @@ const username = "sheeshalicia";
 const repoList = document.querySelector(".repo-list");
 const repoBoxes = document.querySelector(".repos");
 const repoData = document.querySelector(".repo-data");
+const backToReposButton = document.querySelector(".view-repos");
+const filterInput = document.querySelector(".filter-repos");
 
 //this async function fetches information from my github profile
 const getProfileInfo =  async function () {
@@ -43,8 +45,9 @@ const displayRepos = async function (){
 displayRepoInfo(repoData);
 };
 
-//this function displays info about each repo
+//this function displays each repo as a list (boxes)
 const displayRepoInfo = function (repos) {
+    filterInput.classList.remove("hide");
     //loop and create a list item for each repo with a class and name
     for (const repo of repos) {
         const repoItem = document.createElement("li");
@@ -75,7 +78,7 @@ const getRepoInfo = async function (repoName) {
         languages.push(language);
         displayRepoLanguages(repoInfo, languages);
     }
-}
+};
 
 //this function displays the specific repo information
 const displayRepoLanguages = function (repoInfo, languages) {
@@ -91,6 +94,32 @@ const displayRepoLanguages = function (repoInfo, languages) {
     <a class="visit" href="${repoInfo.html_url}" target="_blank" rel="noreferrer noopener">View Repo on GitHub!</a>
     `;
     repoData.append(div);
-}
+    backToReposButton.classList.remove("hide");
+};
 
+//add a click event to the "back to repos" button
+backToReposButton.addEventListener("click", function () {
+    repoData.classList.add("hide");
+    repoBoxes.classList.remove("hide");
+    backToReposButton.classList.add("hide");
+});
+
+//add an input event to the search box
+filterInput.addEventListener("input", function (e) {
+    const searchText = e.target.value;
+    const repos = document.querySelectorAll(".repo");
+    const lowercaseSearchText = searchText.toLowerCase();
+    
+    //Loop through each repo inside your repos element
+    for (const repo of repos) {
+        //create a variable and assing in to the lowercase value of the innertext of each repo
+        const lowercaseRepoText = repo.innerText.toLowerCase();
+        //check to see if the lowercase repo text includes the lowercase search text, and show it if it does
+        if (lowercaseRepoText.includes(lowercaseSearchText)){
+            repo.classList.remove("hide")
+        } else {
+            repo.classList.add("hide");
+        }
+    }
+});
 
