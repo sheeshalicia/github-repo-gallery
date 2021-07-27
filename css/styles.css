@@ -8,7 +8,7 @@ body {
     justify-content: center;
     margin: 0;
     font-family: "Open Sans", sans-serif;
-    background-color: lightgrey;
+    background-color: e8e8e8;
     color: #e7cbd1;
     font-size: 16px;
 }
@@ -107,7 +107,7 @@ ul {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    background-color: #250d13;
+    background-color: #572d37;
     color: #fff;
     font-size: 18px;
     padding-bottom: 2em;
